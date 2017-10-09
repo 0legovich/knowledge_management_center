@@ -16,7 +16,7 @@ ActiveRecord::Schema.define(version: 20171009165503) do
     t.string "first_name"
     t.string "last_name"
     t.string "patronymic"
-    t.datetime "birthday", null: false
+    t.datetime "birthday"
     t.string "sex"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
