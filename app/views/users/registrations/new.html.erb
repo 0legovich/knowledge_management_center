@@ -1,27 +1,21 @@
 <h2>Sign up!!!</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
-    <div class="form-group">
-      <%= f.label :email %><br/>
-      <%= f.email_field :email, autofocus: true %>
-    </div>
+    <%= f.input :first_name %>
+    <%= f.input :last_name %>
+    <%= f.collection_radio_buttons :sex, [[1, "м"], [0, "ж"]], :first, :last %>
+    <%= f.input :email %>
 
-    <div class="form-group">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-          <em>(<%= @minimum_password_length %> символов минимум)</em>
-      <% end %><br/>
-      <%= f.password_field :password, autocomplete: "off" %>
-    </div>
+    <%= f.input :password, class: "form-group" %>
+    <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> символов минимум)</em>
+    <% end %>
 
-    <div class="form-group">
-      <%= f.label :password_confirmation %><br/>
-      <%= f.password_field :password_confirmation, autocomplete: "off" %>
-    </div>
+    <%= f.input :password_confirmation %><br/>
 
-    <%= f.submit "Sign up", class: "btn btn-primary" %>
+    <%= f.button :submit, "Зарегистрироваться", class: "btn btn-primary" %>
 <% end %>
 
 <%= render "users/shared/links" %>
