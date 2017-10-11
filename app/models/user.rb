@@ -5,10 +5,10 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  validates :first_name, :last_name, presence: true, length: {maximum: 15}
+  validates :first_name, :last_name, :email, presence: true, length: {maximum: 25}
   validates :sex, :role, presence: true
 
-  # before_validation :set_role
+  before_validation :set_role, on: :create
 
   def set_role
     self.role = Role.first

@@ -3,6 +3,8 @@ SimpleForm.setup do |config|
   config.error_notification_class = 'alert alert-danger'
   config.button_class = 'btn btn-default'
   config.boolean_label_class = nil
+  config.item_wrapper_class = 'form-check form-check-inline'
+  config.item_wrapper_tag = :div
 
   config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
@@ -44,10 +46,13 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
+  # vertical_radio_and_checkboxes - элементы расположены в одну строчку
+  # crutch:
+  # b.use :label, class: 'control-label' ->
   config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
     b.optional :readonly
-    b.use :label, class: 'control-label'
+    b.use :label, wrap_with: { tag: 'div', class: 'control-label' }
     b.use :input
     b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }

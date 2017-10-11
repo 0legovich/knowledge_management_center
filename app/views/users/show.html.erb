@@ -8,6 +8,7 @@
       <h4>Дата рождения: <%= @user.birthday %></h4>
       <h4>Пол: <%= @user.sex %></h4>
       <h4>Email: <%= @user.email %></h4>
+      <%= link_to "Редактировать", edit_user_registration_path(@user), class: "btn btn-primary" %>
     </div>
   </div>
 </div>

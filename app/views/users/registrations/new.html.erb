@@ -1,11 +1,16 @@
-<h2>Sign up!!!</h2>
+<h2>Регистрация</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= devise_error_messages! %>
 
     <%= f.input :first_name %>
     <%= f.input :last_name %>
-    <%= f.collection_radio_buttons :sex, [[1, "м"], [0, "ж"]], :first, :last %>
+    <%= f.input :sex,
+                collection: [[1, "м"], [0, "ж"]],
+                as: :radio_buttons,
+                label_method: :last,
+                value_method: :first
+    %>
     <%= f.input :email %>
 
     <%= f.input :password, class: "form-group" %>

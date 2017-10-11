@@ -8,9 +8,9 @@ class Ability
     if user.admin?
       can :manage, :all
     elsif user.teacher?
-      can :read, User, id: user.id
+      can :manage, User, id: user.id
     elsif user.learner?
-      can :read, User, id: user.id
+      can :manage, User, id: user.id
     end
     #
     # The first argument to `can` is the action you are giving the user

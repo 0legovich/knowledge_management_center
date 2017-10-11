@@ -1,4 +1,17 @@
 ru:
+  activerecord:
+    models:
+      user: "Пользователь"
+      role: "Роль"
+
+    attributes:
+      user:
+        email: "Email"
+        first_name: "Имя"
+        last_name: "Фамилия"
+        patronymic: "Отчество"
+        sex: "Пол"
+        password: "Пароль"
   app:
     name: "Центр контроля знаний"
     company: "Центр контроля знаний"
