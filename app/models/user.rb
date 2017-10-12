@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  has_many :organization_users
+  has_many :organizations, through: :organization_users
   belongs_to :role
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
