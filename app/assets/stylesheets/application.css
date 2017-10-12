@@ -14,3 +14,8 @@
  *= require_self
  *= require font-awesome
  */
+
+.buffer-both {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}

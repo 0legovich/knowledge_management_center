@@ -3,6 +3,7 @@ ru:
     models:
       user: "Пользователь"
       role: "Роль"
+      organization: "Организация"
 
     attributes:
       user:
@@ -15,6 +16,10 @@ ru:
         password: "Пароль"
       role:
         label: "Наименование"
+      organization:
+        full_name: "Наименование"
+        short_name: "Кратное наименование"
+        address: "Адрес"
     errors:
       models:
         user:
@@ -36,6 +41,14 @@ ru:
               too_long: "Слишком длинная Фамилия"
             sex:
               blank: "Заполните поле Пол"
+        organization:
+          attributes:
+            full_name:
+              blank: "Заполните поле Наименование"
+              too_long: "Слишком длинное наименование"
+            address:
+              blank: "Заполните поле Адрес"
+              too_long: "Слишком длинный Адрес"
   date:
     formats:
       default: "%Y-%m-%d"

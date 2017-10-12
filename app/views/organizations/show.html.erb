@@ -1,0 +1,14 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      # Фото организации
+    </div>
+    <div class="col-md-6">
+      <h1 class="h1"><%= @organization.name %></h1>
+      <h4>Полное наименование: <%= @organization.full_name %></h4>
+      <h4>Краткое наименование: <%= @organization.short_name %></h4>
+      <h4>Адрес: <%= @organization.address %></h4>
+      <%= link_to "Редактировать", edit_organization_path(@organization), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

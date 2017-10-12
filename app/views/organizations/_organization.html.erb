@@ -1,0 +1,6 @@
+<tr>
+  <th><%= organization_counter + 1 %></th>
+  <td><%= link_to organization.full_name, organization_path(organization), class: 'table-link' %></td>
+  <td><%= link_to organization.short_name, organization_path(organization), class: 'table-link' %></td>
+  <td><%= link_to organization.address, organization_path(organization), class: 'table-link' %></td>
+</tr>
