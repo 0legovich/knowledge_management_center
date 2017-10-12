@@ -11,7 +11,38 @@ ru:
         last_name: "Фамилия"
         patronymic: "Отчество"
         sex: "Пол"
+        birthday: "Дата рождения"
         password: "Пароль"
+      role:
+        label: "Наименование"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "Заполните поле Email"
+              invalid: "Не является email-ом"
+              taken: "Email уже существует"
+            password:
+              blank: "Заполните поле Пароль"
+              too_short: "Слишком короткий пароль"
+            password_confirmation:
+              confirmation: "Не соответствует паролю"
+            first_name:
+              blank: "Заполните поле Имя"
+              too_long: "Слишком длинное Имя"
+            last_name:
+              blank: "Заполните поле Фамилия"
+              too_long: "Слишком длинная Фамилия"
+            sex:
+              blank: "Заполните поле Пол"
+  date:
+    formats:
+      default: "%Y-%m-%d"
+      short: "%b %d"
+      long: "%B %d, %Y"
+    month_names: [Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+    abbr_month_names: [Янв, Фев, Март, Апр, Май, Июнь, Июль, Авг, Сен, Окт, Нояб, Дек]
   app:
     name: "Центр контроля знаний"
     company: "Центр контроля знаний"

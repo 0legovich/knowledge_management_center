@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th>№</th>
+        <th>Имя</th>
+        <th>Дата рождения</th>
+        <th>Email</th>
+        <th>Роль</th>
+      </tr>
+      </thead>
+      <tbody>
+      <%= render partial: 'user', collection: @users %>
+      </tbody>
+    </table>
+  </div>
+</div>

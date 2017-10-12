@@ -12,11 +12,14 @@
           <%= f.input :first_name %>
           <%= f.input :last_name %>
           <%= f.input :sex,
-                      collection: [[1, "м"], [0, "ж"]],
+                      collection: [[true, "м"], [false, "ж"]],
                       as: :radio_buttons,
                       label_method: :last,
                       value_method: :first
           %>
+          <%= f.input :birthday, as: :date, start_year: Date.today.year - 100,
+                      end_year: Date.today.year,
+                      order: [:year, :month, :day] %>
           <%= f.input :email %>
 
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -27,7 +30,7 @@
 
           <%= f.input :password %>
           <% if @minimum_password_length %>
-              <em><%= @minimum_password_length %> characters minimum</em>
+              <em>минимум <%= @minimum_password_length %> символов</em>
           <% end %>
 
           <%= f.input :password_confirmation %>
@@ -35,9 +38,9 @@
           <%= f.button :submit, "Обновить", class: "btn btn-primary" %>
       <% end %>
 
-      <%= button_to "Cancel my account", registration_path(resource_name),
-                    data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-danger" %>
-      <%= link_to "Back", :back %>
+      <%= button_to "Удалить аккаунт", registration_path(resource_name),
+                    data: {confirm: "Вы уверены?"}, method: :delete, class: "btn btn-danger" %>
+      <%= link_to "Назад", :back %>
     </div>
   </div>
 </div>

@@ -6,7 +6,7 @@ SimpleForm.setup do |config|
   config.item_wrapper_class = 'form-check form-check-inline'
   config.item_wrapper_tag = :div
 
-  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_form, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
     b.use :html5
     b.use :placeholder
     b.optional :maxlength
@@ -17,7 +17,7 @@ SimpleForm.setup do |config|
     b.use :label, class: 'control-label'
 
     b.use :input, class: 'form-control'
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block form-control-feedback' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
@@ -49,12 +49,12 @@ SimpleForm.setup do |config|
   # vertical_radio_and_checkboxes - элементы расположены в одну строчку
   # crutch:
   # b.use :label, class: 'control-label' ->
-  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+  config.wrappers :vertical_radio_and_checkboxes, tag: 'div', class: 'form-group', error_class: 'has-danger' do |b|
     b.use :html5
     b.optional :readonly
     b.use :label, wrap_with: { tag: 'div', class: 'control-label' }
     b.use :input
-    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :error, wrap_with: { tag: 'div', class: 'help-block form-control-feedback' }
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
