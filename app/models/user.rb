@@ -11,7 +11,7 @@ class User < ApplicationRecord
   before_validation :set_role, on: :create
 
   def set_role
-    self.role = Role.learner
+    self.role = Role.admin
   end
 
   def name
