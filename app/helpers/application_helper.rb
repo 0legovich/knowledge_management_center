@@ -27,4 +27,10 @@ module ApplicationHelper
     end
     flash_messages.join("\n").html_safe
   end
+
+  def password_hint
+    if @minimum_password_length
+    "#{@minimum_password_length} символов минимум"
+    end
+  end
 end

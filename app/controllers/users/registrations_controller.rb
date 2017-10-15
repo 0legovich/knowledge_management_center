@@ -3,11 +3,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_account_update_params, only: [:update]
 
   # PUT /resource
+  def edit
+    @user = User.find(params[:format])
+  end
+
   def update
+    # @user = params[]
     if account_update_params[:password].blank?
       update = true if @user.update_without_password(account_update_params)
     else
-      update = true if @user.update(account_update_params)
+      update = true if @user.update_attributes(account_update_params)
     end
 
     if update
@@ -29,7 +34,11 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
-    attributes = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+    if current_user.admin?
+      attributes = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+    else
+      attributes = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+    end
     devise_parameter_sanitizer.permit(:account_update, keys: attributes)
   end
 end

@@ -1,7 +1,7 @@
 <tr>
   <th scope="row"><%= user_counter + 1 %></th>
-  <td><%= user.name %></td>
-  <td><%= user.birthday %></td>
-  <td><%= user.email %></td>
-  <td><%= user.role.label %></td>
+  <td><%= link_to user.name, user_path(user), class: 'table-link' %></td>
+  <td><%= link_to user.birthday, user_path(user), class: 'table-link' %></td>
+  <td><%= link_to user.email, user_path(user), class: 'table-link' %></td>
+  <td><%= link_to user.role.label, user_path(user), class: 'table-link' %></td>
 </tr>

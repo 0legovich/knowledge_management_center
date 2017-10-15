@@ -6,11 +6,15 @@
     <div class="col-md-6">
       <h2>Редактирование профиля <%= @user.name %></h2>
 
-      <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: {method: :put}) do |f| %>
-          <%= devise_error_messages! %>
-
+      <%= simple_form_for @user, url: {action: "update"} do |f| %>
           <%= f.input :first_name %>
           <%= f.input :last_name %>
+          <%= f.input :patronymic %>
+          <% if current_user.admin? %>
+              <%= f.association :role, as: :select, label_method: :label, include_blank: false %>
+              <%= f.association :organizations, as: :check_boxes %>
+              <%= f.input :organizations, collection: @organizations, input_html: { multiple: true} %>
+          <% end %>
           <%= f.input :sex,
                       collection: [[true, "м"], [false, "ж"]],
                       as: :radio_buttons,
@@ -22,23 +26,16 @@
                       order: [:year, :month, :day] %>
           <%= f.input :email %>
 
-          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-              <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-          <% end %>
-
           <i>Если Вы не хотите изменять пароль оставьте эти поля пустыми</i>
 
-          <%= f.input :password %>
-          <% if @minimum_password_length %>
-              <em>минимум <%= @minimum_password_length %> символов</em>
-          <% end %>
+          <%= f.input :password, hint: password_hint %>
 
           <%= f.input :password_confirmation %>
 
           <%= f.button :submit, "Обновить", class: "btn btn-primary" %>
       <% end %>
 
-      <%= button_to "Удалить аккаунт", registration_path(resource_name),
+      <%= button_to "Удалить аккаунт", registration_path(@user),
                     data: {confirm: "Вы уверены?"}, method: :delete, class: "btn btn-danger" %>
       <%= link_to "Назад", :back %>
     </div>

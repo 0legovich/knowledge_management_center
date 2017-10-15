@@ -14,6 +14,8 @@ ru:
         sex: "Пол"
         birthday: "Дата рождения"
         password: "Пароль"
+        role: "Роль"
+        organizations: "Организации"
       role:
         label: "Наименование"
       organization:

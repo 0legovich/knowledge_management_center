@@ -1,0 +1,33 @@
+<div class="container">
+  <h1 class="h1">Создание пользователя</h1>
+  <div class="row">
+    <div class="col-md-6">
+      <%= simple_form_for @user, :url => create_user_path(@user) do |f| %>
+          <%= f.input :first_name, required: false %>
+          <%= f.input :last_name %>
+          <%= f.input :patronymic %>
+          <%= f.input :role_id,
+                      collection: Role.all.map {|r| [r.label, r.id]},
+                      as: :select,
+                      include_blank: false,
+                      value_method: :last,
+                      label_method: :first %>
+          <%= f.input :sex,
+                      collection: [[true, "м"], [false, "ж"]],
+                      as: :radio_buttons,
+                      label_method: :last,
+                      value_method: :first
+          %>
+          <%= f.input :birthday, as: :date, start_year: Date.today.year - 100,
+                      end_year: Date.today.year,
+                      order: [:year, :month, :day] %>
+          <%= f.input :email %>
+
+          <%= f.input :password, class: "form-group", hint: password_hint %>
+
+          <%= f.input :password_confirmation %>
+          <%= f.button :submit, "Создать", class: "btn btn-primary" %>
+      <% end %>
+    </div>
+  </div>
+</div>

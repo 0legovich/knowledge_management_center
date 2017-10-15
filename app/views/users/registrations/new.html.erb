@@ -1,9 +1,10 @@
-<h2>Регистрация</h2>
+<h2>Регистрация (только для учеников)</h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
 
     <%= f.input :first_name, required: false %>
     <%= f.input :last_name %>
+    <%= f.input :patronymic %>
     <%= f.input :sex,
                 collection: [[true, "м"], [false, "ж"]],
                 as: :radio_buttons,
@@ -15,10 +16,7 @@
                 order: [:year, :month, :day] %>
     <%= f.input :email %>
 
-    <%= f.input :password, class: "form-group" %>
-    <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> символов минимум)</em>
-    <% end %>
+    <%= f.input :password, class: "form-group", hint: password_hint %>
 
     <%= f.input :password_confirmation %><br/>
 

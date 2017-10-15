@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :organization_users
   has_many :organizations, through: :organization_users
   belongs_to :role
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -13,7 +14,7 @@ class User < ApplicationRecord
   before_validation :set_role, on: :create
 
   def set_role
-    self.role = Role.admin
+    self.role = Role.learner if self.role.blank?
   end
 
   def name
