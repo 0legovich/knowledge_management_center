@@ -12,7 +12,9 @@
           <%= f.input :patronymic %>
           <% if current_user.admin? %>
               <%= f.association :role, as: :select, label_method: :label, include_blank: false %>
+              <% # можно но не красиво %>
               <%= f.association :organizations, as: :check_boxes %>
+              <% # что-то непонятное %>
               <%= f.input :organizations, collection: @organizations, input_html: { multiple: true} %>
           <% end %>
           <%= f.input :sex,
