@@ -29,14 +29,14 @@ class User < ApplicationRecord
   end
 
   def admin?
-    self.role.id == 1 unless self.role.blank?
+    self.role == Role.admin
   end
 
   def teacher?
-    self.role == Role.teacher unless self.role.blank?
+    self.role == Role.teacher
   end
 
   def learner?
-    self.role = Role.learner unless self.role.blank?
+    self.role == Role.learner
   end
 end

@@ -6,12 +6,14 @@
           <%= f.input :first_name, required: false %>
           <%= f.input :last_name %>
           <%= f.input :patronymic %>
-          <%= f.input :role_id,
-                      collection: Role.all.map {|r| [r.label, r.id]},
-                      as: :select,
-                      include_blank: false,
-                      value_method: :last,
-                      label_method: :first %>
+          <% if current_user.admin? %>
+              <%= f.association :role, as: :select, label_method: :label, include_blank: false %>
+              <% if @user.teacher? %>
+                  <%= f.association :organizations, as: :check_boxes %>
+              <% elsif @user.learner? %>
+                  <%= f.association :organizations, as: :select, include_blank: false, input_html: {multiple: false} %>
+              <% end %>
+          <% end %>
           <%= f.input :sex,
                       collection: [[true, "м"], [false, "ж"]],
                       as: :radio_buttons,

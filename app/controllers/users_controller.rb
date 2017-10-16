@@ -48,10 +48,17 @@ class UsersController < ApplicationController
   end
 
   def update_params
-    if current_user.admin?
-      params.require(:user).permit(:first_name, :last_name, :patronymic, :role_id, :birthday, :sex, :email, :password, :password_confirmation, :organization_ids)
+    default_params = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+
+    if @user.teacher?
+      default_params.push(organization_ids: [])
+      default_params.push(:role_id) if current_user.admin?
+    elsif @user.learner?
+      default_params << :organization_ids
+      default_params.push(:role_id) if current_user.admin?
     else
-      params.require(:user).permit(:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation)
+      default_params << :role_id if current_user.admin?
     end
+    params.require(:user).permit(default_params)
   end
 end
