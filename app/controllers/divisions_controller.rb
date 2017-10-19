@@ -10,7 +10,7 @@ class DivisionsController < ApplicationController
 
   def create
     if @division.save
-      flash[:notice] = "Подразделение создано"
+      flash[:notice] = "Подразделение успешно создано"
       redirect_to division_path(@division)
     else
       render :new
@@ -24,6 +24,11 @@ class DivisionsController < ApplicationController
   end
 
   def update
+    if @division.update(division_params)
+      redirect_to division_path(@division), notice: "Подразделение успешно обновлено"
+    else
+      render :edit
+    end
   end
 
   def destroy

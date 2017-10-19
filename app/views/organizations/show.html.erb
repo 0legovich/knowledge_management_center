@@ -11,4 +11,24 @@
       <%= link_to "Редактировать", edit_organization_path(@organization), class: "btn btn-primary" %>
     </div>
   </div>
+  <div class="row buffer-both">
+    <div class="col-md-12">
+      <h3 class="h3">Подразделения организации</h3>
+      <%= link_to "Создать", new_division_path(organization: @organization), class: "btn btn-primary" %>
+    </div>
+    <div class="col-md-12">
+      <table class="table table-hover">
+        <thead>
+        <tr>
+          <th>№</th>
+          <th>Наименование</th>
+          <th>Учреждение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <%= render partial: 'divisions/division', collection: @divisions %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>

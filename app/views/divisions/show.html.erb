@@ -1,2 +1,13 @@
-<h1>DivisionsController#show</h1>
-<p>Find me in app/views/divisions_controller/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      # Фото подразделения
+    </div>
+    <div class="col-md-6">
+      <h1 class="h1"><%= @division.name %></h1>
+      <h4>Наименование: <%= @division.name %></h4>
+      <h4>Организация: <%= @division.organization.name %></h4>
+      <%= link_to "Редактировать", edit_division_path(@division), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>

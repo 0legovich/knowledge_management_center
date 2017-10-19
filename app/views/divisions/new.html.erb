@@ -2,11 +2,7 @@
   <h1 class="h1">Создание подразделения</h1>
   <div class="row">
     <div class="col-md-6">
-      <%= simple_form_for @division do |f| %>
-          <%= f.input :name %>
-          <%= f.association :organization, as: :select, include_blank: false %>
-          <%= f.button :submit, "Создать", class: "btn btn-primary" %>
-      <% end %>
+      <%= render 'form' %>
     </div>
   </div>
 </div>

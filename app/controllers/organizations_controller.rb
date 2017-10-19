@@ -7,6 +7,7 @@ class OrganizationsController < ApplicationController
   end
 
   def show
+    @divisions = @organization.divisions
   end
 
   def new
