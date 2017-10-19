@@ -1,0 +1,5 @@
+<tr>
+  <th><%= division_counter + 1 %></th>
+  <td><%= link_to division.name, division_path(division), class: 'table-link' %></td>
+  <td><%= link_to division.organization.name, division_path(division), class: 'table-link' %></td>
+</tr>
