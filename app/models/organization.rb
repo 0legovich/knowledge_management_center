@@ -1,6 +1,8 @@
 class Organization < ApplicationRecord
+  has_many :divisions
   has_many :organization_users
   has_many :users, through: :organization_users
+
   validates :full_name, :address, presence: true, length: {maximum: 50}
 
   def name

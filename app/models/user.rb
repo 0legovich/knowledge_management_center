@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :organization_users
   has_many :organizations, through: :organization_users
+  has_many :division_users
+  has_many :divisions, through: :division_users
   belongs_to :role
 
   # Include default devise modules. Others available are:
