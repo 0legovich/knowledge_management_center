@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <h2>Редактирование профиля <%= @user.name %></h2>
 
-      <%= simple_form_for @user, url: {action: "update"}, remote: true do |f| %>
+      <%= simple_form_for @user, url: {action: "update"} do |f| %>
           <%= f.input :first_name %>
           <%= f.input :last_name %>
           <%= f.input :patronymic %>
@@ -20,7 +20,7 @@
               <%= f.association :organizations,
                                 as: :check_boxes,
                                 input_html: {multiple: true},
-                                wrapper_html: {id: 'organizations_check_boxes'} %>
+                                wrapper_html: {id: 'organizations_check_boxes'}  %>
               <%= f.association :organizations,
                                 as: :radio_buttons, include_blank: false,
                                 wrapper_html: {id: 'organizations_select'} %>

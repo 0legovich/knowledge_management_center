@@ -43,6 +43,8 @@ ru:
               too_long: "Слишком длинная Фамилия"
             sex:
               blank: "Заполните поле Пол"
+            organizations:
+              blank: "Выберите организацию"
         organization:
           attributes:
             full_name:

@@ -10,6 +10,8 @@ class User < ApplicationRecord
 
   validates :first_name, :last_name, presence: true, length: {maximum: 25}
   validates :role, presence: true
+  validates :organizations, presence: true, if: :teacher?
+  validates :organizations, presence: true, if: :learner?
 
   before_validation :set_role, on: :create
 
