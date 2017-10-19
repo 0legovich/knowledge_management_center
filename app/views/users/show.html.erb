@@ -8,7 +8,8 @@
       <h4>Дата рождения: <%= l @user.birthday, format: :long %></h4>
       <h4>Пол: <%= @user.sex_label %></h4>
       <h4>Email: <%= @user.email %></h4>
-      <%= link_to "Редактировать", edit_user_path(@user), class: "btn btn-primary" %>
+      <% # data: { turbolinks: false } - потому что JS код: $(document).ready(function () {...} %>
+      <%= link_to "Редактировать", edit_user_path(@user), data: { turbolinks: false }, class: "btn btn-primary" %>
     </div>
   </div>
 </div>

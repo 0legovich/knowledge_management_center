@@ -12,6 +12,7 @@ class UsersController < ApplicationController
   def create
     @user.role = Role.find(params[:user][:role_id])
     if @user.save
+      flash[:notice] = "Профиль успешно создан"
       redirect_to user_path(@user)
     else
       render :new
@@ -44,21 +45,20 @@ class UsersController < ApplicationController
   private
 
   def create_params
-    params.require(:user).permit(:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation, :role_id)
+    parameters = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation, :role_id]
+    parameters.push(organization_ids: []) if params[:user][:role_id].to_i == Role.teacher.id
+    parameters << :organization_ids if params[:user][:role_id].to_i == Role.learner.id
+
+    params.require(:user).permit(parameters)
   end
 
   def update_params
-    default_params = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+    parameters = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
+    @user.destroy_organizations
+    parameters.push(:role_id) if current_user.admin?
+    parameters.push(organization_ids: []) if params[:user][:role_id].to_i == Role.teacher.id
+    parameters << :organization_ids if params[:user][:role_id].to_i == Role.learner.id
 
-    if @user.teacher?
-      default_params.push(organization_ids: [])
-      default_params.push(:role_id) if current_user.admin?
-    elsif @user.learner?
-      default_params << :organization_ids
-      default_params.push(:role_id) if current_user.admin?
-    else
-      default_params << :role_id if current_user.admin?
-    end
-    params.require(:user).permit(default_params)
+    params.require(:user).permit(parameters)
   end
 end

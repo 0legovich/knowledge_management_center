@@ -13,13 +13,10 @@ class User < ApplicationRecord
 
   before_validation :set_role, on: :create
 
-  def set_role
-    self.role = Role.learner if self.role.blank?
-  end
-
   def name
     "#{self.first_name} #{self.last_name} #{self.patronymic}"
   end
+
   def short_name
     "#{self.last_name} #{self.first_name.first}. "
   end
@@ -38,5 +35,13 @@ class User < ApplicationRecord
 
   def learner?
     self.role == Role.learner
+  end
+
+  def destroy_organizations
+    self.organizations.destroy_all
+  end
+
+  def set_role
+    self.role = Role.learner if self.role.blank?
   end
 end
