@@ -1,9 +1,7 @@
 <%= simple_form_for @division do |f| %>
-    <% if params[:organization].blank? %>
-        <%= f.association :organization, as: :select, include_blank: false %>
-    <% else %>
-        <%= f.association :organization, selected: Organization.find(params[:organization]).id, disabled: true, include_blank: false %>
-    <% end %>
+    <%= f.association :organization,
+                      selected: get_selected_organization(params[:organization]),
+                      include_blank: false%>
     <%= f.input :name %>
     <%= f.button :submit, "Создать", class: "btn btn-primary" %>
 <% end %>

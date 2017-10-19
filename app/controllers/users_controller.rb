@@ -7,6 +7,8 @@ class UsersController < ApplicationController
   end
 
   def new
+    @organizations = Organization.all
+    @divisions = Division.all
   end
 
   def create
@@ -21,6 +23,7 @@ class UsersController < ApplicationController
 
   def edit
     @organizations = Organization.all
+    @divisions = Division.all
   end
 
   def update

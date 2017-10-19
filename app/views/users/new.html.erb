@@ -19,7 +19,15 @@
                                 wrapper_html: {id: 'organizations_check_boxes'} %>
               <%= f.association :organizations,
                                 as: :radio_buttons, include_blank: false,
-                                wrapper_html: {id: 'organizations_select'} %>
+                                wrapper_html: {id: 'organizations_radio_buttons'} %>
+              <%= f.association :divisions,
+                                collection: @organizations,
+                                as: :grouped_select,
+                                input_html: {multiple: true},
+                                include_blank: false,
+                                group_method: :divisions,
+                                wrapper_html: {id: 'divisions_select'} %>
+
           <% end %>
           <%= f.input :sex,
                       collection: [[true, "м"], [false, "ж"]],
