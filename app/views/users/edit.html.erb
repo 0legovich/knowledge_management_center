@@ -15,7 +15,6 @@
                                 as: :select,
                                 label_method: :label,
                                 include_blank: false,
-                                :input_html => {:onChange => "Selected(this)"},
                                 wrapper_html: {id: 'role_select'} %>
               <%= f.association :organizations,
                                 as: :check_boxes,

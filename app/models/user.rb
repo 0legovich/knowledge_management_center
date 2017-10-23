@@ -11,9 +11,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   validates :first_name, :last_name, presence: true, length: {maximum: 25}
-  validates :role, presence: true
+  validates :role, :sex, presence: true
   validates :organizations, presence: true, if: :teacher?
+  validates :divisions, length: {minimum: 1}, presence: true, if: :teacher?
   validates :organizations, presence: true, if: :learner?
+  validates :divisions, presence: true, length: {maximum: 1, minimum: 1}, if: :learner?
 
   before_validation :set_role, on: :create
 

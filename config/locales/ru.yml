@@ -45,6 +45,9 @@ ru:
               blank: "Заполните поле Пол"
             organizations:
               blank: "Выберите организацию"
+            divisions:
+              blank: "Выберите подразделение"
+              too_long: "Слишком много подразделений для данной роли"
         organization:
           attributes:
             full_name:

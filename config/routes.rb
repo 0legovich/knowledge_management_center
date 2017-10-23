@@ -9,7 +9,10 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :users
+  resources :users do
+    get :get_divs_for_hiding_and_showing, :on => :collection
+    get :get_divisions, :on => :collection
+  end
   post '/user/create' => 'users#create', :as => :create_user
   resources :organizations
   resources :divisions
