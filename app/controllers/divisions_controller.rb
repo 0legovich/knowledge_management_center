@@ -18,6 +18,7 @@ class DivisionsController < ApplicationController
   end
 
   def show
+    @users = @division.users
   end
 
   def edit
