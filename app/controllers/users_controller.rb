@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user.role = Role.find(params[:user][:role_id])
+    # @user.role = Role.find(params[:user][:role_id])
     if @user.save
       flash[:notice] = "Профиль успешно создан"
       redirect_to user_path(@user)
@@ -69,12 +69,11 @@ class UsersController < ApplicationController
   end
 
   def get_divisions
-    organizations = params[:organizations].map {|i| Organization.find(i)}
+    organizations = params[:organizations].map { |i| Organization.find(i) }
     get_hash = {"organizations" => []}
     organizations.each do |o|
-      get_hash["organizations"].push([o.id.to_s, o.name, o.divisions.map {|i| [i.id, i.name]}])
+      get_hash["organizations"].push([o.id.to_s, o.name, o.divisions.map { |i| [i.id, i.name] }])
     end
-    p get_hash
     render json: get_hash
   end
 
@@ -91,17 +90,50 @@ class UsersController < ApplicationController
       parameters.push(division_ids: [])
     end
 
+    check_organizations_divisions
     params.require(:user).permit(parameters)
   end
 
   def update_params
+    # параметры по умолчанию
     parameters = [:first_name, :last_name, :patronymic, :birthday, :sex, :email, :password, :password_confirmation]
-    @user.destroy_organizations
-    parameters.push(:role_id) if current_user.admin?
-    parameters.push(organization_ids: []) if params[:user][:role_id].to_i == Role.teacher.id
-    parameters << :organization_ids if params[:user][:role_id].to_i == Role.learner.id
 
+    # удалим все организации и подразделения перед тем как присвоить новые
+    @user.destroy_organizations
+    @user.destroy_divisions
+
+    # роль может обновлять только Админ
+    parameters.push(:role_id) if current_user.admin?
+
+    # для Учителя добавляем "организации" и "подрезделения"
+    if params[:user][:role_id].to_i == Role.teacher.id
+      parameters.push(organization_ids: [])
+      parameters.push(division_ids: [])
+    end
+
+    # для Учителя добавляем "организацию" и "подрезделения"
+    if params[:user][:role_id].to_i == Role.learner.id
+      parameters << :organization_ids
+      parameters.push(division_ids: [])
+    end
+
+    check_organizations_divisions
     params.require(:user).permit(parameters)
   end
 
+  # оставить все подразделения, которые принадлежат выбранным организациям
+  def check_organizations_divisions
+    if params[:user][:organization_ids].is_a? String
+      org_ids = [params[:user][:organization_ids]]
+    else
+      org_ids = params[:user][:organization_ids]
+      org_ids.delete("")
+    end
+
+    org_div_ids = org_ids.map do |org_id|
+      Organization.find(org_id).divisions.map { |div| div.id.to_s }
+    end.flatten
+
+    params[:user][:division_ids].delete_if { |i| !org_div_ids.include?(i) }
+  end
 end

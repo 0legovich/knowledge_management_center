@@ -13,7 +13,7 @@ class User < ApplicationRecord
   validates :first_name, :last_name, presence: true, length: {maximum: 25}
   validates :role, :sex, presence: true
   validates :organizations, presence: true, if: :teacher?
-  validates :divisions, length: {minimum: 1}, presence: true, if: :teacher?
+  validates :divisions, presence: true, if: :teacher?
   validates :organizations, presence: true, if: :learner?
   validates :divisions, presence: true, length: {maximum: 1, minimum: 1}, if: :learner?
 
@@ -45,6 +45,10 @@ class User < ApplicationRecord
 
   def destroy_organizations
     self.organizations.destroy_all
+  end
+
+  def destroy_divisions
+    self.divisions.destroy_all
   end
 
   def set_role

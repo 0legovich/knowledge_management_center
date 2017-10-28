@@ -18,7 +18,8 @@ class DivisionsController < ApplicationController
   end
 
   def show
-    @users = @division.users
+    @learners = @division.users.where(role: Role.learner)
+    @teachers = @division.users.where(role: Role.teacher)
   end
 
   def edit
